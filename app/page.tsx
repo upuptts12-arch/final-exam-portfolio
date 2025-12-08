@@ -1,65 +1,100 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import { useUser, SignInButton, SignOutButton } from '@clerk/nextjs';
 
 export default function Home() {
+  const { isSignedIn } = useUser();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-gradient-to-br from-green-50 via-amber-50 to-emerald-100 flex items-center justify-center p-6 relative overflow-hidden">
+      {/* 로그인/로그아웃 버튼 - 화면 오른쪽 상단 */}
+      <div className="absolute top-4 right-4">
+        {isSignedIn ? (
+          <SignOutButton>
+            <button className="px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500 transition text-sm">
+              로그아웃
+            </button>
+          </SignOutButton>
+        ) : (
+          <SignInButton>
+            <button className="px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500 transition text-sm">
+              로그인
+            </button>
+          </SignInButton>
+        )}
+      </div>
+
+      {/* 배경 장식 */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute w-72 h-72 bg-white/20 rounded-full -top-20 -left-20 animate-pulseSlow"></div>
+        <div className="absolute w-56 h-56 bg-white/10 rounded-full -bottom-16 right-10 animate-pulseSlow"></div>
+      </div>
+
+      {/* 프로필 카드 */}
+      <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-3xl p-10 max-w-md w-full text-center border border-emerald-100 relative z-10">
+        {/* 프로필 */}
+        <div className="flex flex-col items-center space-y-3">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+            alt="profile"
+            className="w-28 h-28 rounded-full border-4 border-emerald-200 shadow-sm"
+          />
+          <h1 className="text-3xl font-bold text-emerald-700">
+            김정서의 포트폴리오
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className="text-gray-600 text-sm">정보보호학과 24학번</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* 메뉴 버튼 */}
+        <div className="mt-8 flex flex-col gap-3">
+          <Link
+            href="/about"
+            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            📖 About
+          </Link>
+          <Link
+            href="/project"
+            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
           >
-            Documentation
-          </a>
+            💻 Project
+          </Link>
+          <Link
+            href="/team"
+            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
+          >
+            👥 Team
+          </Link>
+          <Link
+            href="/contact"
+            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
+          >
+            📬 Contact
+          </Link>
         </div>
-      </main>
-    </div>
+
+        {/* 푸터 */}
+        <p className="text-xs text-gray-400 mt-6">
+          © 2025 Kim Jungseo | Portfolio
+        </p>
+      </div>
+
+      {/* Tailwind 애니메이션 */}
+      <style jsx>{`
+        @keyframes pulseSlow {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(10px);
+          }
+        }
+        .animate-pulseSlow {
+          animation: pulseSlow 10s ease-in-out infinite;
+        }
+      `}</style>
+    </main>
   );
 }
