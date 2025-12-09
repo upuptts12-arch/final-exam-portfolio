@@ -1,6 +1,12 @@
 'use client';
 import { SignIn } from '@clerk/nextjs';
 
-export default function SignInPage() {
-  return <SignIn />;
+export default function Page() {
+  return (
+    <div
+      style={{ display: 'flex', justifyContent: 'center', marginTop: '80px' }}
+    >
+      <SignIn />
+    </div>
+  );
 }

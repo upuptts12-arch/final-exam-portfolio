@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { useUser, SignInButton, SignOutButton } from '@clerk/nextjs';
 
@@ -7,94 +8,84 @@ export default function Home() {
   const { isSignedIn } = useUser();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 via-amber-50 to-emerald-100 flex items-center justify-center p-6 relative overflow-hidden">
-      {/* 로그인/로그아웃 버튼 - 화면 오른쪽 상단 */}
-      <div className="absolute top-4 right-4">
-        {isSignedIn ? (
-          <SignOutButton>
-            <button className="px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500 transition text-sm">
-              로그아웃
-            </button>
-          </SignOutButton>
-        ) : (
-          <SignInButton>
-            <button className="px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500 transition text-sm">
-              로그인
-            </button>
-          </SignInButton>
-        )}
-      </div>
+    <div className="min-h-screen bg-[#FFFBEB] font-sans text-slate-800 pb-20">
+      {/* 1. 상단 네비게이션 바 */}
+      <nav className="bg-[#A7F3D0] px-6 py-4 flex items-center justify-between shadow-sm sticky top-0 z-50">
+        <h1 className="text-xl md:text-2xl font-bold text-emerald-900 tracking-tight">
+          BOO
+        </h1>
 
-      {/* 배경 장식 */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute w-72 h-72 bg-white/20 rounded-full -top-20 -left-20 animate-pulseSlow"></div>
-        <div className="absolute w-56 h-56 bg-white/10 rounded-full -bottom-16 right-10 animate-pulseSlow"></div>
-      </div>
+        <div className="flex items-center gap-6 font-medium text-emerald-900">
+          <Link href="/about" className="hover:text-emerald-700 transition">
+            About
+          </Link>
+          <Link href="/project" className="hover:text-emerald-700 transition">
+            Project
+          </Link>
+          <Link href="/team" className="hover:text-emerald-700 transition">
+            Team
+          </Link>
+          <Link href="/contact" className="hover:text-emerald-700 transition">
+            Contact
+          </Link>
 
-      {/* 프로필 카드 */}
-      <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-3xl p-10 max-w-md w-full text-center border border-emerald-100 relative z-10">
-        {/* 프로필 */}
-        <div className="flex flex-col items-center space-y-3">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-            alt="profile"
-            className="w-28 h-28 rounded-full border-4 border-emerald-200 shadow-sm"
-          />
-          <h1 className="text-3xl font-bold text-emerald-700">
-            김정서의 포트폴리오
-          </h1>
-          <p className="text-gray-600 text-sm">정보보호학과 24학번</p>
+          {isSignedIn ? (
+            <SignOutButton>
+              <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-lg text-sm transition shadow-sm">
+                로그아웃
+              </button>
+            </SignOutButton>
+          ) : (
+            <SignInButton mode="modal">
+              <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-lg text-sm transition shadow-sm">
+                로그인
+              </button>
+            </SignInButton>
+          )}
+        </div>
+      </nav>
+
+      {/* 2. 메인 컨텐츠 영역 */}
+      <main className="w-full px-6 py-16 flex flex-col items-center text-center">
+        <div className="w-full max-w-3xl flex flex-col items-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-700 mb-10">
+            Welcome to JungSeo's Portfolio
+          </h2>
+
+          {/* ✅ 프로필 이미지 살짝 축소 */}
+          <div className="relative mb-10 group cursor-pointer">
+            <div className="w-56 h-56 rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-white relative z-10 transition-transform duration-300 group-hover:scale-105">
+              <img
+                src="/profile.jpg"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute top-4 left-4 w-full h-full rounded-3xl bg-emerald-200 z-0"></div>
+          </div>
+
+          <div className="space-y-3 mb-16">
+            <h3 className="text-3xl font-bold text-slate-800">
+              정보보호학과 24학번 김정서
+            </h3>
+          </div>
         </div>
 
-        {/* 메뉴 버튼 */}
-        <div className="mt-8 flex flex-col gap-3">
-          <Link
-            href="/about"
-            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
-          >
-            📖 About
-          </Link>
-          <Link
-            href="/project"
-            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
-          >
-            💻 Project
-          </Link>
-          <Link
-            href="/team"
-            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
-          >
-            👥 Team
-          </Link>
-          <Link
-            href="/contact"
-            className="block px-4 py-2 bg-emerald-400 text-white rounded-full shadow-md hover:bg-emerald-500 transition text-sm"
-          >
-            📬 Contact
-          </Link>
+        {/* ✅ 하단 이미지 높이 축소 */}
+        <div className="w-full max-w-[90%] mt-4 px-4">
+          <div className="w-full h-56 md:h-80 bg-white rounded-2xl overflow-hidden shadow-lg border-4 border-white relative group">
+            <img
+              src="/배경2.jpg"
+              alt="Bottom Banner"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
         </div>
+      </main>
 
-        {/* 푸터 */}
-        <p className="text-xs text-gray-400 mt-6">
-          © 2025 Kim Jungseo | Portfolio
-        </p>
-      </div>
-
-      {/* Tailwind 애니메이션 */}
-      <style jsx>{`
-        @keyframes pulseSlow {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(10px);
-          }
-        }
-        .animate-pulseSlow {
-          animation: pulseSlow 10s ease-in-out infinite;
-        }
-      `}</style>
-    </main>
+      <footer className="text-center py-8 text-slate-400 text-sm">
+        © 2025 Kim Jungseo. All rights reserved.
+      </footer>
+    </div>
   );
 }

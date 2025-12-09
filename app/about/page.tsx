@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link'; // Link 추가
+import Link from 'next/link';
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-100 flex items-center justify-center p-6">
+    <main className="min-h-screen bg-linear-to-r from-green-50 via-emerald-50 to-teal-100 flex items-center justify-center p-6">
       <div className="max-w-2xl w-full animate-fadeIn">
         {/* 홈으로 돌아가기 버튼 */}
         <div className="mb-4">
@@ -62,9 +62,11 @@ export default function About() {
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start relative z-10">
             {/* 왼쪽: 프로필 이미지 */}
             <div className="shrink-0">
+              {/* ▼▼▼ 프로필 사진 변경 (프사.jpg) ▼▼▼ */}
+              {/* rounded-2xl: 둥근 네모 모양 / rounded-full: 원형 */}
               <img
-                src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-                alt="profile"
+                src="/프사.jpg"
+                alt="김정서"
                 className="w-32 h-32 rounded-2xl bg-white border-4 border-emerald-50 shadow-lg object-cover"
               />
             </div>

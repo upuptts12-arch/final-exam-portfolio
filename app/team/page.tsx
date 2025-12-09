@@ -1,20 +1,51 @@
 'use client';
 
 import React from 'react';
+// --- [미리보기용 임시 코드] ---
+// 로컬 프로젝트(Next.js)에서 사용 시 이 부분을 지우고
 import Link from 'next/link';
+// ---------------------------
 
 export default function Team() {
   const members = [
-    { name: '김정서', url: 'https://github.com/upuptts12-arch' },
-    { name: '오은채', url: 'https://github.com/euon05/' },
-    { name: '이예빈', url: 'https://github.com/yebeen547' },
-    { name: '정효민', url: 'https://github.com/EHWkddl' },
-    { name: '한지원', url: '' }, // URL 없음
+    {
+      name: '김정서',
+      role: 'Team Leader',
+      // 각 멤버의 사진 파일 경로를 여기에 적어줍니다. (public 폴더 기준)
+      image: '/나.jpg',
+      url: 'https://github.com/upuptts12-arch',
+    },
+    {
+      name: '오은채',
+      role: 'Frontend',
+      image: '/은채.jpg',
+      url: 'https://github.com/euon05/',
+    },
+    {
+      name: '이예빈',
+      role: 'Frontend',
+      image: '/예빈.jpg',
+      url: 'https://github.com/yebeen547',
+    },
+    {
+      name: '정효민',
+      role: 'Frontend',
+      image: '/정효민.jpg',
+      url: 'https://github.com/EHWkddl',
+    },
+    {
+      name: '한지원',
+      role: 'Frontend',
+      image: '/지원.jpg',
+      url: 'https://github.com/jiwon416',
+    },
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-100 flex items-center justify-center p-6">
-      <div className="max-w-md w-full animate-fadeIn">
+    <main className="min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-100 flex items-center justify-center p-6">
+      <div className="max-w-2xl w-full animate-fadeIn">
+        {' '}
+        {/* 너비를 좀 더 넓혔어요 (max-w-2xl) */}
         <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-emerald-100 relative overflow-hidden">
           {/* 배경 장식 */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-100 rounded-full blur-3xl opacity-50 -mr-10 -mt-10 pointer-events-none"></div>
@@ -30,117 +61,101 @@ export default function Team() {
           </Link>
 
           {/* 헤더 */}
-          <h1 className="text-3xl font-bold text-emerald-800 mb-2 flex items-center gap-3 relative z-10">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-emerald-500"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            Team
-          </h1>
-
-          {/* 팀 정보 요약 박스 */}
-          <div className="mb-6 relative z-10">
-            <h2 className="text-xl font-semibold text-emerald-700">
-              웹을 위해 태어남
-            </h2>
-            <div className="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full mt-1 font-medium">
+          <div className="text-center mb-8 relative z-10">
+            <h1 className="text-3xl font-bold text-emerald-800 flex items-center justify-center gap-2 mb-2">
+              <span className="text-4xl">🌱</span> Team
+            </h1>
+            <p className="text-emerald-600 font-medium">웹을 위해 태어남</p>
+            <div className="inline-block bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full mt-2 font-bold">
               Project: shoppingmall
             </div>
           </div>
 
-          {/* 팀원 리스트 */}
-          <div className="space-y-3 relative z-10">
-            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider ml-1">
-              Members
-            </h3>
-            <ul className="space-y-2">
-              {members.map((member, index) => (
-                <li key={index}>
-                  <a
-                    href={member.url || '#'}
-                    target={member.url ? '_blank' : undefined}
-                    rel={member.url ? 'noopener noreferrer' : undefined}
-                    onClick={(e) => !member.url && e.preventDefault()}
-                    className={`flex items-center justify-between p-3 rounded-xl bg-white border border-emerald-50 transition-all duration-300 group shadow-sm ${
-                      member.url
-                        ? 'hover:border-emerald-200 hover:bg-emerald-50/50 hover:shadow cursor-pointer'
-                        : 'cursor-default opacity-80'
-                    }`}
-                  >
-                    <span
-                      className={`font-medium text-gray-700 ${
-                        member.url ? 'group-hover:text-emerald-700' : ''
-                      }`}
-                    >
+          {/* 팀원 카드 그리드 */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 relative z-10">
+            {members.map((member, index) => (
+              <a
+                key={index}
+                href={member.url || '#'}
+                target={member.url ? '_blank' : undefined}
+                rel={member.url ? 'noopener noreferrer' : undefined}
+                className="group block"
+              >
+                <div className="bg-white border border-emerald-100 rounded-2xl p-4 flex flex-col items-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full">
+                  {/* ▼▼▼ 사진 영역 (네모난 모양) ▼▼▼ */}
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden mb-3 shadow-md group-hover:scale-105 transition-transform">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="text-center">
+                    <h3 className="font-bold text-gray-800 group-hover:text-emerald-700 transition-colors">
                       {member.name}
-                    </span>
-                    <span
-                      className={`flex items-center text-sm transition-colors ${
-                        member.url
-                          ? 'text-gray-400 group-hover:text-emerald-600'
-                          : 'text-gray-300'
-                      }`}
-                    >
-                      {member.url ? 'GitHub' : '준비중'}
-                      {member.url && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="ml-1"
-                        >
-                          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-                          <path d="M9 18c-4.51 2-5-2-7-2"></path>
-                        </svg>
-                      )}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+                    </h3>
+
+                    {/* 역할 표시 삭제됨 */}
+
+                    {/* 깃허브 아이콘 */}
+                    <div className="mt-2 text-gray-300 group-hover:text-emerald-500 transition-colors flex justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
           </div>
 
-          {/* 배포 상태 */}
-          <div className="mt-6 p-3 bg-gray-50 rounded-lg border border-gray-100 flex items-start gap-2 relative z-10">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-gray-400 mt-0.5"
+          {/* 배포 주소 배너 */}
+          <div className="relative z-10 group">
+            <a
+              href="https://shoppingmall-taupe.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
             >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-            <div>
-              <p className="text-sm font-medium text-gray-500">배포 상태</p>
-              <p className="text-sm text-gray-400">아직 미완성입니다 🚧</p>
-            </div>
+              <div className="p-4 bg-linear-to-r from-emerald-500 to-teal-500 rounded-xl text-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center gap-3">
+                <div className="bg-white/20 p-2 rounded-full backdrop-blur-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-emerald-100 font-medium mb-0.5">
+                    TEAM PROJECT
+                  </p>
+                  <p className="font-bold text-lg truncate">
+                    쇼핑몰 배포 사이트 바로가기 🚀
+                  </p>
+                </div>
+                <div className="text-white/80">→</div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
