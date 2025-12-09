@@ -52,9 +52,9 @@ export default function Home() {
             Welcome to JungSeo's Portfolio
           </h2>
 
-          {/* ✅ 프로필 이미지 살짝 축소 */}
+          {/* ✅ 프로필 사진 아주 약간 축소 */}
           <div className="relative mb-10 group cursor-pointer">
-            <div className="w-56 h-56 rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-white relative z-10 transition-transform duration-300 group-hover:scale-105">
+            <div className="w-52 h-52 rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-white relative z-10 transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/profile.jpg"
                 alt="Profile"
@@ -65,13 +65,13 @@ export default function Home() {
           </div>
 
           <div className="space-y-3 mb-16">
-            <h3 className="text-3xl font-bold text-slate-800">
+            <h3 className="text-1xl font-bold text-slate-800">
               정보보호학과 24학번 김정서
             </h3>
           </div>
         </div>
 
-        {/* ✅ 하단 이미지 높이 축소 */}
+        {/* 하단 이미지 (그대로 유지) */}
         <div className="w-full max-w-[90%] mt-4 px-4">
           <div className="w-full h-56 md:h-80 bg-white rounded-2xl overflow-hidden shadow-lg border-4 border-white relative group">
             <img
@@ -89,3 +89,4 @@ export default function Home() {
     </div>
   );
 }
+
